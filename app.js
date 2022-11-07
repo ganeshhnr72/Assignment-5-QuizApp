@@ -1,55 +1,66 @@
 $(document).ready(function () {
-  $.get("https://5d76bf96515d1a0014085cf9.mockapi.io/quiz", function (g) {
-    for (var i = 0; i < g.length; i++) {
-      var questions = $("<h2>").html("Q" + g[i].id + " " + g[i].question);
-      $("#question").append(questions);
-      for (var j = 0; j < g[i].options.length; j++) {
-        var options = $("<div>").addClass("label");
-        var label = $("<label>").attr("id", g[i].id);
-        var labeL = $("<input>")
+  $.get("https://5d76bf96515d1a0014085cf9.mockapi.io/quiz", function (e) {
+    // var UrlValue = e;
+    // console.log(e.length);
+    for (var i = 0; i < e.length; i++) {
+      var form = $("<form>").attr("id", "quiz-form");
+      var label = $("<label>").attr("id", "question_label");
+      label.html("Q " + e[i].id + " " + e[i].question);
+      form.append(label);
+      $(".quiz_main_body").append(form);
+      for (var j = 0; j < e[i].options.length; j++) {
+        var optionDiv = $("<div>").attr("id", "options_div");
+        var input = $("<input>")
           .attr("type", "radio")
-          .attr("name", "option" + g[i].id)
+          .attr("name", "option" + e[i].id)
           .attr("value", j + 1)
-          .attr("class", "option" + g[i].id)
-          .addClass("radio-btn");
-        var span = $("<span>").html(g[i].options[j]);
-        // console.log(labeL + "<br>");
-        label.append(labeL, span);
-        options.append(label);
-        $("#question").append(options);
+          .attr("class", "option" + e[i].id);
+        optionDiv.append(input);
+        form.append(optionDiv);
+        var span = $("<span>").attr("id", "options").html(e[i].options[j]);
+        optionDiv.append(span);
       }
-      $("#question").append($("<div>").addClass("hr"));
+      // console.log(option);
+      var hr = $("<hr>");
+      form.append(hr);
     }
-    $("#submit").click(function (e) {
-      e.preventDefault();
-      var selected = [];
-      var answers = [];
-      for (var i = 0; i < g.length; i++) {
-        var names = "option" + g[i].id;
-        selected.push($("input[name= " + names + "]:checked").val());
-        answers.push(g[i].answer);
-        if ($("input[name= " + names + "]:checked").val() == g[i].answer) {
-          $("input[name= " + names + "]:checked")
+
+    $("#submit_btn").click(function (pi) {
+      pi.preventDefault();
+      // console.log("hello");
+      var ansSelected = [];
+      var answer = [];
+
+      for (var k = 0; k < e.length; k++) {
+        var opt = "option" + e[k].id;
+        ansSelected.push($("input[name= " + opt + "]:checked").val());
+        answer.push(e[k].answer);
+        // console.log($("input[name= " + opt + "]:checked").val());
+
+        // console.log(ansSelected[k]);
+        // console.log("answer " + answer[k]);
+        if (ansSelected[k] == answer[k]) {
+          // console.log("hello");
+          $("input[name= " + opt + "]:checked")
             .parent()
-            .append("<span><i class='fas fa-check'></i></span>");
+            .append("<i class='fas fa-check'></i>");
         } else {
-          $("input[name= " + names + "]:checked")
+          // console.log("no hello");
+          $("input[name= " + opt + "]:checked")
             .parent()
-            .append("<span><i class='fas fa-times'></i></span>");
-          $("input[name= " + names + "]")[g[i].answer - 1].parentNode.append(
-            $("<i>").addClass("fas fa-check")[0]
-          );
+            .append("<i class='fas fa-times'></i>");
         }
-      }
-      var count = 0;
-      for (var n = 0; n < selected.length; n++) {
-        for (var n = 0; n < answers.length; n++) {
-          if (selected[n] == answers[n]) {
-            count++;
+        var count = 0;
+        for (var m = 0; m < ansSelected.length; m++) {
+          for (var m = 0; m < answer.length; m++) {
+            if (ansSelected[m] == answer[m]) {
+              count++;
+            }
           }
         }
+        console.log(count);
+        $("#totalScore").html(count + " /5");
       }
-      $("#totalMarks").html(count + "/5");
     });
   });
 });
