@@ -1,85 +1,95 @@
 body {
   background-color: #54c3ef;
-  padding-top: 24px;
-  padding-bottom: 37.08px;
-  padding-left: 24px;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
-#heading_text {
+#main_heading {
   font-family: "Caveat Brush", cursive;
   font-size: 90px;
   text-shadow: 2px 5px #2b3252;
   text-align: center;
+  padding: 10px;
   margin: 0px;
   color: #fad744;
 }
 
-#quiz {
-  background-color: #2b3252;
-  width: 55%;
-  margin-top: 36px;
-  border-radius: 6px;
-  padding: 16px;
+section {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
 }
-
+.quiz_main_body {
+  background-color: #2b3252;
+  width: 60%;
+  height: auto;
+  align-items: center;
+  margin: auto;
+}
+#scoreBoard {
+  width: 150px;
+  height: 200px;
+  background-color: aliceblue;
+  font-family: "Source Sans Pro", sans-serif;
+  position: sticky;
+  right: 200px;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+}
 form {
+  padding: 15px;
+}
+#question_label {
+  display: block;
   color: #fad744;
+  font-size: 30px;
+  font-weight: 500;
   font-family: "Source Sans Pro", sans-serif;
 }
-
-.label {
-  margin-top: 10px;
+#options_div {
+  padding: 15px;
+  font-size: 30px;
+  color: #fad744;
+  margin-bottom: 10px;
 }
-
-.radio-btn {
+input {
   margin-right: 10px;
 }
-
-.hr {
+hr {
   border-bottom: 1px solid #fad744;
   margin-top: 30px;
 }
-section {
-  display: flex;
-  justify-content: center;
+#submit_button {
+  margin-left: 40%;
+  /* top: 300px; */
 }
-#marks {
-  width: 10%;
-  height: 170px;
-  background-color: #fff;
-  color: #000;
-  margin-top: 36px;
-  margin-left: 10px;
+#submit_btn {
+  width: 100px;
+  height: 40px;
+  /* bottom: 100px; */
+  top: -100px;
   border-radius: 5px;
-  padding: 20px;
-  font-family: "Source Sans Pro", sans-serif;
-  position: sticky;
-  top: 5px;
-}
-#btn {
-  text-align: center;
-}
-#submit {
-  background-color: #fad744;
-  color: #000;
-  /* font-family: 'Source Sans Pro', sans-serif; */
   border: none;
-  padding: 10px;
-  font-size: 15px;
-  text-align: center;
-  margin: 10px auto;
-  border-radius: 5px;
+  background-color: #fad744;
 }
-#totalMarks {
-  font-size: 40px;
-  font-weight: bold;
+#scoreBoard {
+  /* display: flex; */
+  font-size: 30px;
+  /* padding: 10px; */
 }
+#scoreText {
+  padding: 20px;
+  display: inline-block;
+}
+#totalScore {
+  /* padding: 20px; */
+  /* display: flex; */
+  /* left: 100px; */
+  padding: 20px;
+  display: inline-block;
+}
+i {
+  padding-left: 20px;
 
-.fa-check {
-  color: #08a66c;
-  padding-left: 10px;
-}
-.fa-times {
-  color: red;
-  padding-left: 10px;
+  right: 0px;
 }
