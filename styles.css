@@ -1,66 +1,95 @@
-$(document).ready(function () {
-  $.get("https://5d76bf96515d1a0014085cf9.mockapi.io/quiz", function (e) {
-    // var UrlValue = e;
-    // console.log(e.length);
-    for (var i = 0; i < e.length; i++) {
-      var form = $("<form>").attr("id", "quiz-form");
-      var label = $("<label>").attr("id", "question_label");
-      label.html("Q " + e[i].id + " " + e[i].question);
-      form.append(label);
-      $(".quiz_main_body").append(form);
-      for (var j = 0; j < e[i].options.length; j++) {
-        var optionDiv = $("<div>").attr("id", "options_div");
-        var input = $("<input>")
-          .attr("type", "radio")
-          .attr("name", "option" + e[i].id)
-          .attr("value", j + 1)
-          .attr("class", "option" + e[i].id);
-        optionDiv.append(input);
-        form.append(optionDiv);
-        var span = $("<span>").attr("id", "options").html(e[i].options[j]);
-        optionDiv.append(span);
-      }
-      // console.log(option);
-      var hr = $("<hr>");
-      form.append(hr);
-    }
+body {
+  background-color: #54c3ef;
+  font-family: "Source Sans Pro", sans-serif;
+}
 
-    $("#submit_btn").click(function (pi) {
-      pi.preventDefault();
-      // console.log("hello");
-      var ansSelected = [];
-      var answer = [];
+#main_heading {
+  font-family: "Caveat Brush", cursive;
+  font-size: 90px;
+  text-shadow: 2px 5px #2b3252;
+  text-align: center;
+  padding: 10px;
+  margin: 0px;
+  color: #fad744;
+}
 
-      for (var k = 0; k < e.length; k++) {
-        var opt = "option" + e[k].id;
-        ansSelected.push($("input[name= " + opt + "]:checked").val());
-        answer.push(e[k].answer);
-        // console.log($("input[name= " + opt + "]:checked").val());
+section {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.quiz_main_body {
+  background-color: #2b3252;
+  width: 60%;
+  height: auto;
+  align-items: center;
+  margin: auto;
+}
+#scoreBoard {
+  width: 150px;
+  height: 200px;
+  background-color: aliceblue;
+  font-family: "Source Sans Pro", sans-serif;
+  position: sticky;
+  right: 200px;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+}
+form {
+  padding: 15px;
+}
+#question_label {
+  display: block;
+  color: #fad744;
+  font-size: 30px;
+  font-weight: 500;
+  font-family: "Source Sans Pro", sans-serif;
+}
+#options_div {
+  padding: 15px;
+  font-size: 30px;
+  color: #fad744;
+  margin-bottom: 10px;
+}
+input {
+  margin-right: 10px;
+}
+hr {
+  border-bottom: 1px solid #fad744;
+  margin-top: 30px;
+}
+#submit_button {
+  margin-left: 40%;
+  /* top: 300px; */
+}
+#submit_btn {
+  width: 100px;
+  height: 40px;
+  /* bottom: 100px; */
+  top: -100px;
+  border-radius: 5px;
+  border: none;
+  background-color: #fad744;
+}
+#scoreBoard {
+  /* display: flex; */
+  font-size: 30px;
+  /* padding: 10px; */
+}
+#scoreText {
+  padding: 20px;
+  display: inline-block;
+}
+#totalScore {
+  /* padding: 20px; */
+  /* display: flex; */
+  /* left: 100px; */
+  padding: 20px;
+  display: inline-block;
+}
+i {
+  padding-left: 20px;
 
-        // console.log(ansSelected[k]);
-        // console.log("answer " + answer[k]);
-        if (ansSelected[k] == answer[k]) {
-          // console.log("hello");
-          $("input[name= " + opt + "]:checked")
-            .parent()
-            .append("<i class='fas fa-check'></i>");
-        } else {
-          // console.log("no hello");
-          $("input[name= " + opt + "]:checked")
-            .parent()
-            .append("<i class='fas fa-times'></i>");
-        }
-        var count = 0;
-        for (var m = 0; m < ansSelected.length; m++) {
-          for (var m = 0; m < answer.length; m++) {
-            if (ansSelected[m] == answer[m]) {
-              count++;
-            }
-          }
-        }
-        console.log(count);
-        $("#totalScore").html(count + " /5");
-      }
-    });
-  });
-});
+  right: 0px;
+}
